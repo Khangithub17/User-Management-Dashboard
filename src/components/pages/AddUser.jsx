@@ -6,39 +6,29 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Modal from "../Modal";
 
-const AddUser = () => {
-  const navigate = useNavigate();
+const AddUser = ({ isOpen, onClose, onUserAdded }) => {
   const [error, setError] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleSubmit = async (user) => {
     try {
       await addUser(user);
       toast.success("User added successfully!");
+      onUserAdded(); // Notify the parent component that a user was added
       setTimeout(() => {
-        setIsModalOpen(false);
-        navigate("/");
-      }, 2000); // Close modal and navigate after 2 seconds
+        onClose();
+      }, 2000); // Close modal after 2 seconds
     } catch (error) {
       setError("Failed to add user.");
     }
   };
 
   return (
-    <div>
-      <button
-        onClick={() => setIsModalOpen(true)}
-        className="bg-[#5D87FF] text-white px-4 py-2 rounded hover:bg-blue-600 flex items-center cursor-pointer"
-      >
-        Add User
-      </button>
-      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <h2 className="text-white text-lg font-bold mb-4 bg-[#5D87FF] p-4 rounded-t-lg">Create User</h2>
-        {error && <div className="text-red-500">{error}</div>}
-        <UserForm onSubmit={handleSubmit} />
-      </Modal>
+    <Modal isOpen={isOpen} onClose={onClose}>
+      <h2 className="text-white text-lg font-bold mb-4 bg-[#5D87FF] p-4 rounded-t-lg">Create User</h2>
+      {error && <div className="text-red-500">{error}</div>}
+      <UserForm onSubmit={handleSubmit} />
       <ToastContainer />
-    </div>
+    </Modal>
   );
 };
 

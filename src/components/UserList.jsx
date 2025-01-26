@@ -3,12 +3,14 @@ import { getUsers, deleteUser } from "../services/api";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrash, faPlus } from '@fortawesome/free-solid-svg-icons';
+import AddUser from "./pages/AddUser";
 
 const UserList = () => {
   const [users, setUsers] = useState([]);
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [usersPerPage] = useState(8); // Set the limit to 8 users per page i am using 8 because i have 10 users in the json file
+  const [usersPerPage] = useState(8); // Set the limit to 8 users per page
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     fetchUsers();
@@ -51,15 +53,22 @@ const UserList = () => {
     }
   };
 
+  const handleUserAdded = () => {
+    fetchUsers(); // Refresh the user list after a new user is added
+  };
+
   return (
     <div className="container mx-auto p-4">
       {error && <div className="text-red-500">{error}</div>}
       <div className="flex justify-between mb-4">
         <h1 className="text-2xl font-bold">User List</h1>
-        <Link to="/add" className="bg-[#5D87FF] text-white px-4 py-2 rounded hover:bg-blue-600 flex items-center cursor-pointer">
+        <button
+          onClick={() => setIsModalOpen(true)}
+          className="bg-[#5D87FF] text-white px-4 py-2 rounded hover:bg-blue-600 flex items-center cursor-pointer"
+        >
           <FontAwesomeIcon icon={faPlus} className="mr-2" />
           Add User
-        </Link>
+        </button>
       </div>
       <div className="overflow-x-auto">
         <table className="w-full border-collapse border border-gray-300">
@@ -121,6 +130,7 @@ const UserList = () => {
           Next
         </button>
       </div>
+      <AddUser isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onUserAdded={handleUserAdded} />
     </div>
   );
 };
