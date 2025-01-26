@@ -28,7 +28,7 @@ const UserForm = ({ onSubmit, initialData }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="p-4">
+    <form onSubmit={handleSubmit} className="p-4 w-full max-w-sm mx-auto">
       <div className="mb-2">
         <input name="firstName" placeholder="First Name" value={user.firstName} onChange={handleChange} className="border p-2 w-full" />
         {errors.firstName && <div className="text-red-500">{errors.firstName}</div>}
@@ -45,7 +45,7 @@ const UserForm = ({ onSubmit, initialData }) => {
         <input name="department" placeholder="Department" value={user.department} onChange={handleChange} className="border p-2 w-full" />
         {errors.department && <div className="text-red-500">{errors.department}</div>}
       </div>
-      <button className="bg-gradient-to-r from-green-400 to-blue-500 text-white px-4 py-2 rounded hover:from-green-500 hover:to-blue-600">Submit</button>
+      <button className="bg-[#5D87FF] text-white px-4 py-2 rounded hover:bg-blue-600 flex items-center cursor-pointer">Submit</button>
     </form>
   );
 };

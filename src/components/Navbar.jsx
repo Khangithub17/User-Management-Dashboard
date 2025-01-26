@@ -4,7 +4,7 @@ import { faHome } from '@fortawesome/free-solid-svg-icons';
 
 const Navbar = () => {
   return (
-    <nav className="bg-gradient-to-r from-blue-500 to-purple-500 text-white p-4 shadow-lg">
+    <nav className="bg-[#5D87FF] text-white p-4 shadow-lg">
       <div className="container mx-auto flex justify-center">
         <Link to="/" className="text-lg font-bold uppercase flex items-center">
           <FontAwesomeIcon icon={faHome} className="mr-2" />
