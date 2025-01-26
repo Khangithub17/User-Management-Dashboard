@@ -1,12 +1,12 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Modal = ({ isOpen, onClose, children }) => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleClose = () => {
     onClose();
-    history.push('/');
+    navigate('/');
   };
 
   if (!isOpen) return null;
