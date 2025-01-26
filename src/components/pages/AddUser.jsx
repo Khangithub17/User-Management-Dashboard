@@ -1,6 +1,5 @@
 import UserForm from "../UserForm";
 import { addUser } from "../../services/api";
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
